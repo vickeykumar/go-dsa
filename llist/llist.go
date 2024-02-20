@@ -64,6 +64,16 @@ func (ll *Linkedlist)Linkedlist_deleteend() interface{} {
     return data
 }
 
+func (ll *Linkedlist)Linkedlist_deletefront() interface{} {
+    if ll.head == nil {
+        return nil
+    }
+    data := ll.head.data
+    ll.head=ll.head.next
+    ll.length--
+    return data
+}
+
 func (ll *Linkedlist)Size() int {
     return ll.length
 }
