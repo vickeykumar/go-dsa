@@ -52,7 +52,9 @@ func CreateGraph_ll_m(adjm [][]int, V int) *Graph_ll {
 	g := CreateGraph_ll(V)
 	for i:=0;i<len(adjm);i++ {
 		for j:=0;j<len(adjm[i]);j++ {
-			g.AddEdge_weight(i, j, adjm[i][j])
+			if adjm[i][j] != 0 {
+				g.AddEdge_digraph_weight(i, j, adjm[i][j])
+			}
 		}
 	}
 	return g
