@@ -23,6 +23,13 @@ func get_ith_element(V []int, i int) int {
 }
 
 /* dynamic programming problems similar to 0/1 knapsack
+ * Knapsack_01(V , W []int, capacity int) int {
+ * IsSubsetSumPresent(nums []int, sum int) bool {
+ * IsEqualSumPartPresent(nums []int) bool {
+ * CountSubsetSum(nums []int, sum int) int { 
+ * MinSubsetSumDiff(nums []int) int {
+ * CountSubsetSumdiff(nums []int, diff int) int {
+ * FindTargetSumWays(nums []int, target int) int {
  * where we have set of items and we have to achieve an optimal solumtion
  * by picking/not picking ith item to achieve a target/optimal solution
  */
