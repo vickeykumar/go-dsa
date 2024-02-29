@@ -72,8 +72,9 @@ func partition(arr []int, low, high int) int {
     pivot := arr[ipivot];
     for i:=ipivot+1; i<=high; i++ {
         if arr[i]<=pivot {
-            ipivot++;
+            ipivot++;   // this way ipivot will always point to last larger elem traversed by i
             swap(arr, i, ipivot);
+            // after this step ipivot will point to last smaller element
         }
     }
     swap(arr, ipivot,low);
@@ -111,6 +112,7 @@ func randomized_quick_sort(arr []int, low, high int) []int {
  * logic - for each ith element on right subarray if is smaller than the low-th 
  * element, use bubble sort(bubbling)/ shift from j=i-1 till low-th index till ith item finds its right place
  * in left subarray, o(n)
+ * iteraten in right subarray and try to find ith items best position in left subarray j=i-1to low
  */
 func merge(arr []int, low, mid, high int) []int {
     for i:=mid; i<=high; i++ {

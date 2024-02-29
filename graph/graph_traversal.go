@@ -27,7 +27,7 @@ func DFS(g Graph_t, start int) {
         for _, v := range g.Get_adjacent(u) {
         	if !visited[v] {
         		st.Push(v)
-        		visited[v] = true
+        		// visited[v] = true // visit only after popping.. try to go the deepest first
         	}
         }
     } 
