@@ -30,7 +30,8 @@ func get_ith_element(V []int, i int) int {
  * MinSubsetSumDiff(nums []int) int {
  * CountSubsetSumdiff(nums []int, diff int) int {
  * FindTargetSumWays(nums []int, target int) int {
- * where we have set of items and we have to achieve an optimal solumtion
+ * 
+ * Pattern - where we have set of items and we have to achieve an optimal solumtion
  * by picking/not picking ith item to achieve a target/optimal solution
  */
 

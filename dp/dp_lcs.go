@@ -14,7 +14,8 @@ import (
   * Print SCS
   * min edit distance
   * Longest Palindromic subsequence
-
+  pattern - two/one strings given, we have to find optimal solution from both of the string. based on condition.
+  - optimal solution for ith charachter depends on previous charachters (pick or not pick)
 */
 
 func get_ith_char(V string, i int) rune {

@@ -65,20 +65,37 @@ func insertion_sort(arr []int, low, high int) []int {
 
 /* returns index of the element after partition,
  * such that all the elements left are less then  and all the elements right
- * are greater then the partitioned element 
+ * are greater then the partitioned element (lomuto partition)
+ * Hoare Partition: 
+  - init two pointers l and h
+  - pivot is smallest index
+  - keep increasing l index while arr[l]=<pivot
+  - keep decreasing h while arr[h]>pivot
+  - if l>=h return l
+  - if i<j swap(arr, l,h)
+ * lomuto partition:
+  - pivot will always be smallest index/ largest index
+  - loop i=ipos... to high
+  - alway keep ipos at last larger element.
+  - as soon as i find the right fit for swaping, swap at ipos
+
+ * Applications:
+  - segregate 0 and 1a
+  - segregate even and odd
+  - -ve and +ve numbers
+  - three way partitioning
  */
 func partition(arr []int, low, high int) int {
-    ipivot := low;
-    pivot := arr[ipivot];
-    for i:=ipivot+1; i<=high; i++ {
-        if arr[i]<=pivot {
-            ipivot++;   // this way ipivot will always point to last larger elem traversed by i
-            swap(arr, i, ipivot);
-            // after this step ipivot will point to last smaller element
+    ipos := low;
+    pivot := arr[ipos];
+    for i:=ipos+1; i<=high; i++ {
+        if arr[i]<=pivot { // found a right fit to place at ipos
+            ipos++;   // this way ipos will always point to last largest elem visited by i
+            swap(arr, i, ipos);
         }
     }
-    swap(arr, ipivot,low);
-    return ipivot;
+    swap(arr, ipos,low);
+    return ipos;
 }
 
 /*

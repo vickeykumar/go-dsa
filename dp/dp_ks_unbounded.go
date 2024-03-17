@@ -13,6 +13,9 @@ import (
  * * rod cutting problem
  * * coin change I - max/total number of ways to reach k
  * * Coin change II - min number of coins
+ * Pattern - where we have set of items and we have to achieve an optimal solumtion
+ * by picking/not picking ith item to achieve a target/optimal solution,  there is no limitation on picking ith item
+ *
  */
 
 /*
