@@ -7,6 +7,9 @@ import (
 )
 
 /*
+* tips for writing base case
+- think of the smallest valid input
+- think of any invalid input
 DP variations:
     * 0/1 Knapsack
     * Unbounded Knapsack

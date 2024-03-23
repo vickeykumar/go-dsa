@@ -8,7 +8,11 @@ import (
     "math"
 )
 
-
+/*
+* data structure used -  graph, disjoint set forest
+* graph apis used - Get_numNodes, Get_EdgeList
+* dsf apis used - MakeSet, FindSet, UnionSet
+*/
 func MST_Kruskal(g Graph_t) (res_edges []Edge) {  
     set := make([]*dsf.DSet, g.Get_numNodes()) // disjoint set datastructures for each node
     for i:=0; i<g.Get_numNodes(); i++ {
@@ -34,6 +38,8 @@ func MST_Kruskal(g Graph_t) (res_edges []Edge) {
  * @param V: number of nodes in graph
  * @param start: start node
  * @returns an array of distance from start node to that node
+ * data structure used -  graph 
+ * graph apis used - Get_numNodes, Get_adjacent, Get_edge_w
  */
 func Dijkstra(arr [][]int, start int) (d []int) {
     g := CreateGraph_m(arr, len(arr));
@@ -74,6 +80,8 @@ func Dijkstra(arr [][]int, start int) (d []int) {
  * @param V: number of nodes in graph
  * @param start: start node
  * @returns a list of edges in MST
+ * data structure used -  graph 
+ * graph apis used - Get_numNodes, Get_adjacent, Get_edge_w
  */
 func Prims_MST(g Graph_t, start int) (res_edges []Edge) {
     if g.Get_numNodes()==0 {

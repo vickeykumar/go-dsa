@@ -126,3 +126,224 @@ func Permutehelper2(nums []int, pos int) (results [][]int) {
     return
 }
 
+//input/output method, input- array
+// output- subset
+func GenSubsets(nums []int, subset []int, pos int) (powerset [][]int) {
+    if pos == len(nums) {
+        // base case
+        subsetCopy := make([]int, len(subset))
+        copy(subsetCopy, subset)
+        powerset = append(powerset, subsetCopy)
+        return 
+    } 
+    tmpsubsets := GenSubsets(nums, subset, pos+1) // without nums[pos] 
+    powerset = append(powerset, tmpsubsets...)
+
+    subset = append(subset, nums[pos])
+    tmpsubsets = GenSubsets(nums, subset, pos+1) // with nums[pos]
+    powerset = append(powerset, tmpsubsets...)
+    return
+}
+
+//input/output method, input- number
+// output- subset
+func Combinations(n, index, k int, subset []int) (result [][]int) {
+    if len(subset)==k {
+        // base case 
+        subsetCopy := make([]int, len(subset))
+        copy(subsetCopy, subset)
+        result = append(result, subsetCopy)
+        return
+    }
+    if index == n+1 {
+        return
+    }
+    tmpsubsets := Combinations(n, index+1, k, subset) // without
+    result = append(result, tmpsubsets...)
+
+    subset = append(subset, index) // include current number
+    tmpsubsets = Combinations(n, index+1, k, subset) // with current num
+    result = append(result, tmpsubsets...)
+    return
+}
+
+
+/* selection of k items from n items
+input/output method, input- items
+// output- subset */
+func Combinations2(items []int, index, k int, subset []int) (result [][]int) {
+    if len(subset)==k {
+        // base case 
+        subsetCopy := make([]int, len(subset))
+        copy(subsetCopy, subset)
+        result = append(result, subsetCopy)
+        return
+    }
+    if index == len(items) {
+        return
+    }
+    tmpsubsets := Combinations2(items, index+1, k, subset) // without current item
+    result = append(result, tmpsubsets...)
+
+    subset = append(subset, items[index]) // include current item 
+    tmpsubsets = Combinations2(items, index+1, k, subset) // with current num
+    result = append(result, tmpsubsets...)
+    return
+}
+
+/*
+Given an array of distinct integers candidates and a target integer target, 
+return a list of all unique combinations of candidates where the chosen numbers sum to target. 
+You may return the combinations in any order.
+The same number may be chosen from candidates an unlimited number of times.
+Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+
+The test cases are generated such that the number of unique combinations that sum up to target 
+is less than 150 combinations for the given input.
+
+*/
+func CombinationsSum(items []int, index, target int, subset []int) (result [][]int) {
+    if target<0 {
+        return
+    }
+    if target==0 {
+        // base case 
+        subsetCopy := make([]int, len(subset))
+        copy(subsetCopy, subset)
+        result = append(result, subsetCopy)
+        return
+    }
+    if index == len(items) {
+        return
+    }
+    tmpsubsets := CombinationsSum(items, index+1, target, subset) // without current item
+    result = append(result, tmpsubsets...)
+
+    subset = append(subset, items[index]) // include current item and dont move on
+    tmpsubsets = CombinationsSum(items, index, target-items[index], subset) // with current num
+    result = append(result, tmpsubsets...)
+    
+    return
+}
+
+/*
+Given a collection of candidate numbers (candidates) and a target number (target), 
+find all unique combinations in candidates where the candidate numbers sum to target.
+
+Each number in candidates may only be used once in the combination.
+
+Note: The solution set must not contain duplicate combinations.
+*/
+func CombinationsSum2(items []int, index, target int, subset []int) (result [][]int) {
+    if target<0 {
+        return
+    }
+    if target==0 {
+        // base case 
+        subsetCopy := make([]int, len(subset))
+        copy(subsetCopy, subset)
+        result = append(result, subsetCopy)
+        return
+    }
+    if index == len(items) {
+        return
+    }
+    subset = append(subset, items[index]) // include current item and move on/ cz only once
+    tmpsubsets := CombinationsSum(items, index+1, target-items[index], subset) // with current num
+    result = append(result, tmpsubsets...)
+    
+    // backtrack vvi ?? why keep picking till u want to pick and ignore once saturated
+    subset = subset[:len(subset)-1]
+    // Skip duplicates at the same level of recursion
+    for index+1 < len(items) && items[index+1] == items[index] {
+        index++
+    }
+    tmpsubsets = CombinationsSum(items, index+1, target, subset) // move on without current item if not picking up
+    result = append(result, tmpsubsets...)
+    
+    return
+}
+
+
+/*
+The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.
+
+Given an integer n, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
+*/
+func isSafe(chessboard [][]bool, row, col int) bool {
+    // up
+    r := row-1
+    for r>=0 {
+        if chessboard[r][col] {
+            // already a queen in this col, not safe
+            return false
+        }
+        r--;
+    }
+    
+    // left diag, (r-1,c-1)-> (r-2,c-2)
+    r = row-1
+    c := col-1
+    for r>=0 && c>=0 {
+        if chessboard[r][c] {
+            // already a queen in this col, not safe
+            return false
+        }
+        r--;
+        c--;
+    }
+    
+    // right diag, (r-1,c+1)-> (r-2,c+2)
+    r = row-1
+    c = col+1
+    for r>=0 && c<len(chessboard) {
+        if chessboard[r][c] {
+            // already a queen in this col, not safe
+            return false
+        }
+        r--;
+        c++;
+    }
+    return true   
+}
+
+func NQueens(chessboard [][]bool, row int, ans *[][]string) {
+    // base case when all queens are placed
+    if row == len(chessboard) {
+        // print the solutions
+        //fmt.Println(chessboard)
+        chess_str := make([]string, len(chessboard))
+        for i:=0; i<len(chessboard); i++ {
+            bytes := make([]byte, len(chessboard)) // byte array for string
+            for j:=0; j<len(chessboard); j++ {
+                if chessboard[i][j] {
+                    bytes[j] = byte('Q')
+                } else {
+                    bytes[j] = byte('.')
+                }
+            }
+            chess_str[i] = string(bytes) // push ith row string
+        }
+        *ans = append(*ans, chess_str)
+    }
+    for col:=0;col<len(chessboard);col++ {
+        if isSafe(chessboard, row, col) {
+            // place the queen here if is safe, then move on
+            chessboard[row][col] = true
+            NQueens(chessboard, row+1, ans) // place next queen in next row
+            // backtrack to find next valid solution
+            chessboard[row][col] = false
+        }
+    }
+} 
+
+func SolveNQueens(n int) [][]string {
+    var ans [][]string
+    chessboard := make([][]bool, n)
+    for i:=0;i<n;i++ {
+        chessboard[i] = make([]bool, n)
+    }
+    //fmt.Println(chessboard)
+    NQueens(chessboard, 0, &ans) // start placing from 1st row , 0
+    return ans
+}

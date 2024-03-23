@@ -9,7 +9,10 @@ import (
 
 /* push-> pop,visit,push(nighbors)
  * g is a Graph interface, as it has all the usefull functions
- * u can use any graph type implementing Graph interface */
+ * u can use any graph type implementing Graph interface 
+ * data structure used -  graph 
+ * graph apis used - Get_numNodes, Get_adjacent
+ */
 func DFS(g Graph_t, start int) {
 	fmt.Printf("DFS: ")
     st := stack.NewStack()
@@ -36,7 +39,10 @@ func DFS(g Graph_t, start int) {
 
 
 
-// enque, deque, enque and visit adjacent nodes as we go
+/* enque, deque, enque and visit adjacent nodes as we go
+* data structure used -  graph 
+* graph apis used - Get_numNodes, Get_adjacent
+*/
 func BFS(g Graph_t, start int) {
 	fmt.Printf("BFS: ")
   // Queue for storing the vertices to visit
