@@ -1,6 +1,10 @@
 package dsf
 
-import "testing"
+import (
+    "reflect"
+    "sort"
+    "testing"
+)
 
 func TestDisjointSet(t *testing.T) {
     // Create some nodes
@@ -35,5 +39,62 @@ func TestDisjointSet(t *testing.T) {
     UnionSet(node1, node3)
     if FindSet(node1) != FindSet(node3) {
         t.Errorf("unionSet failed: expected node3's parent to be same as node2's")
+    }
+}
+
+func TestAccountsMerge(t *testing.T) {
+    tests := []struct {
+        accounts [][]string
+        expected [][]string
+    }{
+        // Test case with single account
+        {
+            accounts: [][]string{
+                {"John", "john@example.com"},
+            },
+            expected: [][]string{
+                {"John", "john@example.com"},
+            },
+        },
+        // Test case with multiple accounts
+        {
+            accounts: [][]string{
+                {"Jane", "jane@example.com"},
+                {"John", "john@example.com", "john.doe@example.com"},
+            },
+            expected: [][]string{
+                {"Jane", "jane@example.com"},
+                {"John", "john@example.com", "john.doe@example.com"},
+            },
+        },
+        // Test case with accounts having overlapping emails
+        {
+            accounts: [][]string{
+                {"John", "john@example.com"},
+                {"Jane", "john@example.com", "jane@example.com"},
+            },
+            expected: [][]string{
+                {"John", "jane@example.com", "john@example.com"},
+            },
+        },
+        // Test case with empty accounts
+        {
+            accounts: [][]string{},
+            expected: [][]string{},
+        },
+        // Add more test cases as needed
+    }
+
+    for i, test := range tests {
+        merged := AccountsMerge(test.accounts)
+        for i, _ := range test.expected {
+            if len(test.expected[i])>1 {
+                sort.Strings(test.expected[i][1:]) // sort inplace so that we can compare
+            }
+        }
+        
+        if !reflect.DeepEqual(merged, test.expected) {
+            t.Errorf("Test: %d For accounts %#v, expected %#v, but got %#v", i, test.accounts, test.expected, merged)
+        }
     }
 }

@@ -3,10 +3,11 @@ package graph
 import (
     _ "fmt"
     "sort"
-    "go-dsa/dsf"
+    dsf "go-dsa/dsf"
     "go-dsa/pq"
     "math"
 )
+
 
 /*
 * data structure used -  graph, disjoint set forest
@@ -14,7 +15,7 @@ import (
 * dsf apis used - MakeSet, FindSet, UnionSet
 */
 func MST_Kruskal(g Graph_t) (res_edges []Edge) {  
-    set := make([]*dsf.DSet, g.Get_numNodes()) // disjoint set datastructures for each node
+    set := make([]*dsf.Dset, g.Get_numNodes()) // disjoint set datastructures for each node
     for i:=0; i<g.Get_numNodes(); i++ {
         set[i]=dsf.MakeSet(i);
     }
@@ -127,4 +128,29 @@ func Prims_MST(g Graph_t, start int) (res_edges []Edge) {
         }
     }
     return res_edges
+}
+
+
+func IsBipartite(graph [][]int) bool {
+    colors := make(map[int]int) // 0 and 1 represent two colors
+    for i := range graph {
+        if _, exists := colors[i]; !exists && !dfs_color(graph, i, 0, colors) {
+            // if coloring is not possible
+            return false
+        }
+    }
+    return true
+}
+
+func dfs_color(graph [][]int, node, color int, colors map[int]int) bool {
+    if c, exists := colors[node]; exists {
+        return c == color
+    }
+    colors[node] = color
+    for _, neighbor := range graph[node] {
+        if !dfs_color(graph, neighbor, 1-color, colors) {
+            return false
+        }
+    }
+    return true
 }

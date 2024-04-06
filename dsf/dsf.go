@@ -16,7 +16,7 @@ type node struct {
   parent *node      // parent
 }
 
-type DSet = node // type to represent disjoint set forest
+type Dset = node // type to represent disjoint set forest
 
 // create a new set with element x, x as parent
 func MakeSet(data interface{}) *node {
@@ -54,6 +54,8 @@ func UnionSet(x, y *node) (root *node) {
 			root1.rank++
 			root = root1
 		}
-	}
+	} else {
+        root = root1 // any of the roots as equal
+  }
 	return
 }

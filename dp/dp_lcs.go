@@ -136,7 +136,7 @@ A shortest common supersequence (SCS) is a common supersequence of minimal lengt
 - idea behind solution is concatenation of the two strings is definitely a supersequence, but it is not the minimal one
 - can we optimize it further??
 - yes, what if some elements are repeated in this superseq. what ?
-- it should be longest common subsequence of the twp.
+- it should be longest common subsequence of the two.
 - so len of SCS is SUM(X+Y)-len(LCS)
 */
 func Get_ShortestCommonSupersequence(string1 string, string2 string) int {

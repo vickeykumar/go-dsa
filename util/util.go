@@ -25,3 +25,15 @@ func ReverseString(str string) string {
 	}
 	return string(runes)
 }
+
+func Pow(base, exponent int) int {
+    result := 1
+    for exponent > 0 {
+        if exponent%2 == 1 {
+            result *= base
+        }
+        base *= base
+        exponent /= 2
+    }
+    return result
+}
