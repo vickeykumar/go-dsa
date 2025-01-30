@@ -4,6 +4,7 @@ import (
     "fmt"
 )
 /*
+
 **--
 **--
 **-*
@@ -16,7 +17,7 @@ i internal node
 
 root:                           i
 children:              B   W       i       i
-2nd chilren:                 B B B W   W B W B
+2nd chilren:                    B B B W   W B W B
 
 find Black% in the quad tree
 

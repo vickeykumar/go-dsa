@@ -86,5 +86,6 @@ func (ll *Linkedlist) Display(foreach func(data interface {})) {
         foreach(last.data)
         last=last.next
     }
+    fmt.Printf("\n")
 }
 

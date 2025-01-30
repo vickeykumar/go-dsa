@@ -5,6 +5,48 @@ import (
 	"reflect"
 )
 
+/*
+using container/heap
+
+// Define a struct to represent a node in the priority queue.
+type Node struct {
+    index int
+    dist  int
+}
+
+// Define a priority queue data structure.
+type PriorityQueue []*Node
+
+// Implement the heap.Interface methods for PriorityQueue.
+
+func (pq PriorityQueue) Len() int { return len(pq) }
+
+func (pq PriorityQueue) Less(i, j int) bool {
+    // In this case, prioritize nodes with smaller distances.
+    return pq[i].dist < pq[j].dist
+}
+
+func (pq PriorityQueue) Swap(i, j int) {
+    pq[i], pq[j] = pq[j], pq[i]
+}
+
+func (pq *PriorityQueue) Push(x interface{}) {
+    // Push element x onto the heap.
+    item := x.(*Node)
+    *pq = append(*pq, item)
+}
+
+func (pq *PriorityQueue) Pop() interface{} {
+    // Pop and return the minimum element from the heap.
+    old := *pq
+    n := len(old)
+    item := old[n-1]
+    *pq = old[0 : n-1]
+    return item
+}
+
+*/
+
 
 type PriorityQueue struct {
 	dataArr []interface{} // array of elements of anytype
