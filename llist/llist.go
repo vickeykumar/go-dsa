@@ -89,3 +89,16 @@ func (ll *Linkedlist) Display(foreach func(data interface {})) {
     fmt.Printf("\n")
 }
 
+
+// Helper function to create a linked list from a slice
+func CreateList(values []int) *Linkedlist {
+    if len(values) == 0 {
+        return &Linkedlist{}
+    }
+    ll := Linkedlist_new()
+    for _, v := range values {
+        ll.Linkedlist_append(v)
+    }
+    return ll
+}
+

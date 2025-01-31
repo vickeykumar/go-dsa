@@ -17,3 +17,24 @@ func ReverseLinkedList(ll *Linkedlist) *Linkedlist {
     return ll
 }
 
+// returns pointer to node where two linked lists intersects
+func LinkedListIntersection(listA, listB *Linkedlist) *llnode {
+    ptrA, ptrB := listA.head, listB.head
+    for ptrA!=ptrB {
+        // traverse A
+        if ptrA!=nil {
+            ptrA = ptrA.next
+        } else {
+            ptrA = listB.head
+        }
+
+        // traverseB
+        if ptrB!=nil {
+            ptrB = ptrB.next
+        } else {
+            ptrB = listA.head
+        }
+    }
+
+    return ptrA
+}
